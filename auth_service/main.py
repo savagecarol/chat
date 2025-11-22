@@ -12,6 +12,7 @@ app.config.from_object(Config)
 auth = Blueprint("auth", __name__, url_prefix="/auth")
 
 
+
 @app.post("/register")
 def register():
     data = request.json
