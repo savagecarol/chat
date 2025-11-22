@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Blueprint
 
 from utils import create_jwt
 from config import Config
@@ -8,6 +8,8 @@ from datetime import datetime
 
 app = Flask(__name__)
 app.config.from_object(Config)
+
+auth = Blueprint("auth", __name__, url_prefix="/auth")
 
 
 @app.post("/register")
@@ -133,6 +135,7 @@ def reset_password():
 
     return jsonify({"message": "Password reset successful"}), 200
 
+app.register_blueprint(auth)
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
